@@ -51,5 +51,3 @@ task :vers do |t|
   puts
   puts "ruby_sscanf version = #{RubySscanf::VERSION}"
 end
-
-
