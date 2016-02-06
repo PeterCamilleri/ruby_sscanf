@@ -42,8 +42,8 @@ The layout of a format specifier is:
     %[skip_flag][width]format
 
 * The % sign is the lead-in character.
-* The optional skip flag, the * causes any data extracted to be ignored.
-* The width field is an integer field that determines the amount of text to be
+* The optional skip flag, the *, causes any data extracted to be ignored.
+* The width field is an integer that determines the amount of text to be
 parsed.
 * The format field determines the type of data being parsed.
 
@@ -78,56 +78,58 @@ leading '0x' or '0X'.
 ## Examples
 Here are a few exmaples of the sscanf method in action.
 
+```ruby
 "12 34 -56".sscanf "%d %2d %4d"
-<br>returns   [12, 34, -56]
+returns   [12, 34, -56]
 
 "255 0b11111111 0377 0xFF 0 ".sscanf "%i %i %i %i %i"
-<br>returns   [255, 255, 255, 255, 0]
+returns   [255, 255, 255, 255, 0]
 
 "7 10 377".sscanf "%o %o %o"
-<br>returns   [7, 8, 255]
+returns   [7, 8, 255]
 
 "10 10011 11110000".sscanf "%b %b %b"
-<br>returns   [2, 19, 240]
+returns   [2, 19, 240]
 
 "0 F FF FFF FFFF".sscanf "%x %x %x %x %x"
-<br>returns   [0, 15, 255, 4095, 65535]
+returns   [0, 15, 255, 4095, 65535]
 
 "Hello Silly World".sscanf "%s %*s %s"
-<br>returns   ["Hello", "World"]
+returns   ["Hello", "World"]
 
 "Hello Silly World".sscanf "%5c %*5c %5c"
-<br>returns   ["Hello", "World"]
+returns   ["Hello", "World"]
 
 "42 The secret is X".sscanf "%i %-1c"
-<br>returns   [42, "The secret is X"]
+returns   [42, "The secret is X"]
 
 "42 The secret is X".sscanf "%i %-2c%c"
-<br>returns   [42, "The secret is ", "X"]
+returns   [42, "The secret is ", "X"]
 
 "42 The secret is X".sscanf "%i %*-2c%c"
-<br>returns   [42,  "X"]
+returns   [42,  "X"]
 
 "9.99 1.234e56 -1e100".sscanf "%f %f %f"
-<br>returns   [9.99, 1.234e56, -1e100]
+returns   [9.99, 1.234e56, -1e100]
 
 "85% 75%".sscanf "%f%% %f%%"
-<br>returns   [85, 75]
+returns   [85, 75]
 
 "12 34 -56".sscanf "%u %u %u"
-<br>returns   [12, 34]
+returns   [12, 34]
 
 "1/2 3/4r -5/6".sscanf "%r %r %r"
-<br>returns   ['1/2'.to_r, '3/4'.to_r, '-5/6'.to_r]
+returns   ['1/2'.to_r, '3/4'.to_r, '-5/6'.to_r]
 
 "1+2i 3+4j -5e10-6.2i".sscanf "%j %j %j"
-<br>returns   [Complex('1+2i'), Complex('3+4j'), Complex('-5e10-6.2i')]
+returns   [Complex('1+2i'), Complex('3+4j'), Complex('-5e10-6.2i')]
 
 "'quote' 'silly' \"un quote\" 'a \\''  ".sscanf "%q %*q %q %q"
-<br>returns   ["quote", "un quote", "a '"]
+returns   ["quote", "un quote", "a '"]
 
 "a b c".sscanf "%[a] %[b] %[c]"
-<br>returns   ["a", "b", "c"]
+returns   ["a", "b", "c"]
+```
 
 ## Contributing
 
