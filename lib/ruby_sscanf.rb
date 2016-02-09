@@ -1,22 +1,40 @@
-
 require 'format_engine'
 require_relative 'ruby_sscanf/version'
 
+#The String class is monkey patched to support sscanf.
 class String
 
+  #A regular expression for decimal integers.
   RSF_DECIMAL  = /[+-]?\d+/
+
+  #A regular expression for hexadecimal integers.
   RSF_HEX      = /[+-]?(0[xX])?\h+/
+
+  #A regular expression for octal integers.
   RSF_OCTAL    = /[+-]?(0[oO])?[0-7]+/
+
+  #A regular expression for binary integers.
   RSF_BINARY   = /[+-]?(0[bB])?[01]+/
+
+  #A regular expression for flexible base integers.
   RSF_INTEGER  = /[+-]?((0[xX]\h+)|(0[bB][01]+)|(0[oO]?[0-7]*)|([1-9]\d*))/
+
+  #A regular expression for floating point and scientific notation numbers.
   RSF_FLOAT    = /[+-]?\d+(\.\d+)?([eE][+-]?\d+)?/
+
+  #A regular expression for rational numbers.
   RSF_RATIONAL = /[+-]?\d+\/\d+(r)?/
+
+  #A regular expression for complex numbers.
   RSF_COMPLEX  = %r{(?<num> \d+(\.\d+)?([eE][+-]?\d+)?){0}
                     [+-]?\g<num>[+-]\g<num>[ij]
                    }x
+
+  #A regular expression for quoted strings.
   RSF_QUOTED   = /("([^\\"]|\\.)*")|('([^\\']|\\.)*')/
 
-  #Get the parsing engine.
+  #Get the parsing engine. This is cached on a per-thread basis. That is to
+  #say, each thread gets its own \FormatEngine::Engine instance.
   def self.get_engine
     Thread.current[:ruby_sscanf_engine] ||= FormatEngine::Engine.new(
       "%b"  => lambda {parse(RSF_BINARY) ? dst << found.to_i(2) : :break},
@@ -47,6 +65,7 @@ class String
           :break
         end
       end,
+
       "%*q" => lambda {parse(RSF_QUOTED) || :break},
 
       "%r"  => lambda {parse(RSF_RATIONAL) ? dst << found.to_r : :break},
