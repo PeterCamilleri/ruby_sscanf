@@ -32,10 +32,15 @@ format string is a description of that format. The output of the sscanf method
 is an array of data extracted from the input string.
 
 The format string consists of literal string components and format specifiers.
+During execution of the sscanf method, each element in the format string is
+used to find the corresponding data in the input string, optionally placing
+the extracted data in the aforementioned output array. If a format element
+cannot be matched to input data, processing stops at that point. Otherwise
+processing continues until all the format elements are done.
 
 Literal string components match themselves in the input string. If the literal
-has a trailing space, then this matches zero or more spaces. The special
-sequence '%%' matches one '%'.
+has a trailing space, then this matches zero or more spaces.
+The special sequence '%%' matches one '%' in the input string.
 
 The layout of a format specifier is:
 
