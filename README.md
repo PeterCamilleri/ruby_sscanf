@@ -141,7 +141,7 @@ returns   ["a", "b", "c"]
 
 I ran a test just to make sure that ruby_sscanf was not terribly
 under-performant when compared to the ruby standard library version. I was
-please to see that in fact ruby_sscanf was faster. Here are the results:
+pleased to see that in fact ruby_sscanf was faster. Here are the results:
 
     Calculating -------------------------------------
     Scan strings with ruby_sscanf
