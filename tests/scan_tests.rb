@@ -26,6 +26,9 @@ class ScanTester < Minitest::Test
     result = "0 F FF FFF FFFF".sscanf "%x %x %x %x %x"
     assert_equal([0, 15, 255, 4095, 65535] , result)
 
+    result = "0 F FF FFF FFFF".sscanf "%X %*x %*X %x %X"
+    assert_equal([0, 4095, 65535] , result)
+
     result = "Hello Silly World".sscanf "%s %*s %s"
     assert_equal(["Hello", "World"] , result)
 
@@ -41,8 +44,29 @@ class ScanTester < Minitest::Test
     result = "42 The secret is X".sscanf "%i %*-2c%c"
     assert_equal([42,  "X"] , result)
 
+    result = "9.99 1.234e56 -1e100".sscanf "%a %e %g"
+    assert_equal([9.99, 1.234e56, -1e100] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%*a %e %g"
+    assert_equal([1.234e56, -1e100] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%a %*e %g"
+    assert_equal([9.99, -1e100] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%a %e %*g"
+    assert_equal([9.99, 1.234e56] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%A %E %G"
+    assert_equal([9.99, 1.234e56, -1e100] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%A %*E %G"
+    assert_equal([9.99, -1e100] , result)
+
     result = "9.99 1.234e56 -1e100".sscanf "%f %f %f"
     assert_equal([9.99, 1.234e56, -1e100] , result)
+
+    result = "9.99 1.234e56 -1e100".sscanf "%F %*F %F"
+    assert_equal([9.99, -1e100] , result)
 
     result = "85% 75%".sscanf "%f%% %f%%"
     assert_equal([85, 75] , result)

@@ -7,8 +7,13 @@ class String
   #A regular expression for decimal integers.
   RSF_DECIMAL  = /[+-]?\d+/
 
+  #A regular expression for unsigned decimal integers.
+  RSF_UNSIGNED = /[+]?\d+/
+
   #A regular expression for hexadecimal integers.
   RSF_HEX      = /[+-]?(0[xX])?\h+/
+  RSF_HEX_PARSE = lambda {parse(RSF_HEX) ? dst << found.to_i(16) : :break}
+  RSF_HEX_SKIP  = lambda {parse(RSF_HEX) || :break}
 
   #A regular expression for octal integers.
   RSF_OCTAL    = /[+-]?(0[oO])?[0-7]+/
@@ -21,6 +26,8 @@ class String
 
   #A regular expression for floating point and scientific notation numbers.
   RSF_FLOAT    = /[+-]?\d+(\.\d+)?([eE][+-]?\d+)?/
+  RSF_FLOAT_PARSE = lambda {parse(RSF_FLOAT) ? dst << found.to_f : :break}
+  RSF_FLOAT_SKIP  = lambda {parse(RSF_FLOAT) || :break}
 
   #A regular expression for rational numbers.
   RSF_RATIONAL = /[+-]?\d+\/\d+(r)?/
@@ -30,6 +37,9 @@ class String
                     [+-]?\g<num>[+-]\g<num>[ij]
                    }x
 
+  #A regular expression for a string.
+  RSF_STRING   = /\S+/
+
   #A regular expression for quoted strings.
   RSF_QUOTED   = /("([^\\"]|\\.)*")|('([^\\']|\\.)*')/
 
@@ -37,6 +47,12 @@ class String
   #say, each thread gets its own \FormatEngine::Engine instance.
   def self.get_engine
     Thread.current[:ruby_sscanf_engine] ||= FormatEngine::Engine.new(
+      "%a"  => RSF_FLOAT_PARSE,
+      "%*a" => RSF_FLOAT_SKIP,
+
+      "%A"  => RSF_FLOAT_PARSE,
+      "%*A" => RSF_FLOAT_SKIP,
+
       "%b"  => lambda {parse(RSF_BINARY) ? dst << found.to_i(2) : :break},
       "%*b" => lambda {parse(RSF_BINARY) || :break},
 
@@ -46,8 +62,23 @@ class String
       "%d"  => lambda {parse(RSF_DECIMAL) ? dst << found.to_i : :break},
       "%*d" => lambda {parse(RSF_DECIMAL) || :break},
 
-      "%f"  => lambda {parse(RSF_FLOAT) ? dst << found.to_f : :break},
-      "%*f" => lambda {parse(RSF_FLOAT) || :break},
+      "%e"  => RSF_FLOAT_PARSE,
+      "%*e" => RSF_FLOAT_SKIP,
+
+      "%E"  => RSF_FLOAT_PARSE,
+      "%*E" => RSF_FLOAT_SKIP,
+
+      "%f"  => RSF_FLOAT_PARSE,
+      "%*f" => RSF_FLOAT_SKIP,
+
+      "%F"  => RSF_FLOAT_PARSE,
+      "%*F" => RSF_FLOAT_SKIP,
+
+      "%g"  => RSF_FLOAT_PARSE,
+      "%*g" => RSF_FLOAT_SKIP,
+
+      "%G"  => RSF_FLOAT_PARSE,
+      "%*G" => RSF_FLOAT_SKIP,
 
       "%i"  => lambda {parse(RSF_INTEGER) ? dst << found.to_i(0) : :break},
       "%*i" => lambda {parse(RSF_INTEGER) || :break},
@@ -71,14 +102,17 @@ class String
       "%r"  => lambda {parse(RSF_RATIONAL) ? dst << found.to_r : :break},
       "%*r" => lambda {parse(RSF_RATIONAL) || :break},
 
-      "%s"  => lambda {parse(/\S+/) ? dst << found : :break},
-      "%*s" => lambda {parse(/\S+/) || :break},
+      "%s"  => lambda {parse(RSF_STRING) ? dst << found : :break},
+      "%*s" => lambda {parse(RSF_STRING) || :break},
 
-      "%u"  => lambda {parse(/\d+/) ? dst << found.to_i : :break},
-      "%*u" => lambda {parse(/\d+/) || :break},
+      "%u"  => lambda {parse(RSF_UNSIGNED) ? dst << found.to_i : :break},
+      "%*u" => lambda {parse(RSF_UNSIGNED) || :break},
 
-      "%x"  => lambda {parse(RSF_HEX) ? dst << found.to_i(16) : :break},
-      "%*x" => lambda {parse(RSF_HEX) || :break},
+      "%x"  => RSF_HEX_PARSE,
+      "%*x" => RSF_HEX_SKIP,
+
+      "%X"  => RSF_HEX_PARSE,
+      "%*X" => RSF_HEX_SKIP,
 
       "%["  => lambda {parse(fmt.regex) ? dst << found : :break},
       "%*[" => lambda {parse(fmt.regex) || :break})

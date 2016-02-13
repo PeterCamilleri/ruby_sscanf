@@ -54,6 +54,8 @@ parsed.
 
 The supported format field values are:
 <br>
+* a,e,f,g,A,E,F,G - Scan for an (optionally signed) floating point or
+scientific notation number.
 * b - Scan for an (optionally signed) binary number with an optional
 leading '0b' or '0B'.
 * c - Grab the next character. If a positive width is specified, grab width
@@ -61,7 +63,6 @@ characters. For a negative width, grab characters to the position from the
 end of the input. For example a width of -1 will grab all of the remaining
 input data.
 * d - Scan for an (optionally signed) decimal number.
-* f - Scan for an (optionally signed) floating point number.
 * i - Scan for an (optionally signed) integer. If the number begins with '0x'
 or '0X', process hexadecimal; with '0b' or '0B', process binary, if '0', '0o',
 or '0O', process octal, else process decimal.
@@ -75,7 +76,7 @@ or "...".
 [+-]?decimal/decimal[r]?
 * s - Scan for a space terminated string.
 * u - Scan for a decimal number.
-* x - Scan for an (optionally signed) hexadecimal number with an optional
+* x,X - Scan for an (optionally signed) hexadecimal number with an optional
 leading '0x' or '0X'.
 * [chars] - Scan for a contiguous string of characters in the set [chars].
 * [^chars] - Scan for a contiguous string of characters not in the set [^chars]
