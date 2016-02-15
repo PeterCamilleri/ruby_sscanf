@@ -4,6 +4,13 @@ The ruby_sscanf gem monkey patches the String class to support the sscanf
 instance method. This method is modeled after the POSIX "C" standard sscanf
 but with alterations and omissions to suit the Ruby programming language.
 
+It is noteworthy that this gem never was intended to be 100% compatible with
+the built in scanf library. Some differences are:
+* It deals only with strings and not IO objects.
+* It adds formats for rational, complex, and quoted string data.
+* It adopts a more uniform approach to eating (or not eating) superfluous spaces.
+* Unsigned integer data are not allowed to be negative.
+
 ## Installation
 
 Add this line to your application's Gemfile:
