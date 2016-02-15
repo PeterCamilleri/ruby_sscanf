@@ -150,21 +150,24 @@ I ran a test just to make sure that ruby_sscanf was not terribly
 under-performant when compared to the ruby standard library version. I was
 pleased to see that in fact ruby_sscanf was faster. Here are the results:
 
+    Warming up --------------------------------------
+    Scan strings with ruby_sscanf
+                             1.594k i/100ms
+    Scan strings with scanf
+                           305.000  i/100ms
     Calculating -------------------------------------
     Scan strings with ruby_sscanf
-                             1.520k i/100ms
+                             16.419k (± 4.9%) i/s -     82.888k
     Scan strings with scanf
-                           308.000  i/100ms
-    -------------------------------------------------
-    Scan strings with ruby_sscanf
-                             15.844k (± 5.2%) i/s -     79.040k
-    Scan strings with scanf
-                              3.127k (± 4.2%) i/s -     15.708k
+                              3.077k (± 6.2%) i/s -     15.555k
 
     Comparison:
-    Scan strings with ruby_sscanf:    15843.8 i/s
-    Scan strings with scanf:     3126.7 i/s - 5.07x slower
+    Scan strings with ruby_sscanf:    16418.6 i/s
+    Scan strings with scanf:     3077.1 i/s - 5.34x slower
 
+This benchmark test was run under:
+* ruby 2.1.6p336 (2015-04-13 revision 50298) [i386-mingw32]
+* format_engine version = 0.5.2
 
 ## Contributing
 
