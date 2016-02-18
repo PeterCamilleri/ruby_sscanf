@@ -8,7 +8,7 @@ require          'minitest_visible'
 class ScanTester < Minitest::Test
 
   #Track mini-test progress.
-  MinitestVisible.track self, __FILE__
+  include MinitestVisible
 
   def test_that_it_can_scan
     result = "12 34 -56".sscanf "%d %2d %4d"

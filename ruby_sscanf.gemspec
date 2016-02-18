@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency 'minitest', "~> 5.5.1"
-  spec.add_development_dependency 'minitest_visible', "~> 0.0.2"
+  spec.add_development_dependency 'minitest_visible', ">= 0.1.0"
   spec.add_development_dependency 'rdoc', "~> 4.0.1"
 
 end
