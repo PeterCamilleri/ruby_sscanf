@@ -49,15 +49,19 @@ Literal string components match themselves in the input string. If the literal
 has a trailing space, then this matches zero or more spaces.
 The special sequence '%%' matches one '%' in the input string.
 
-The layout of a format specifier is:
+The layouts of a format specifier are:
 
     %[skip_flag][width]format
+    %[skip_flag][[min_width,]max_width]set
 
 * The % sign is the lead-in character.
 * The optional skip flag, the *, causes any data extracted to be ignored.
 * The width field is an integer that determines the amount of text to be
-parsed.
+parsed. Note that a .precision field may be specified, but it is ignored.
 * The format field determines the type of data being parsed.
+* The min_width is the minimum allowed run of characters in the set.
+* The max_width is the maximum allowed run of characters in the set.
+* The set field is a regular expression style [...] set.
 
 The supported format field values are:
 <br>
@@ -152,22 +156,22 @@ pleased to see that in fact ruby_sscanf was faster. Here are the results:
 
     Warming up --------------------------------------
     Scan strings with ruby_sscanf
-                             1.594k i/100ms
+                             1.768k i/100ms
     Scan strings with scanf
-                           305.000  i/100ms
+                           310.000  i/100ms
     Calculating -------------------------------------
     Scan strings with ruby_sscanf
-                             16.419k (± 4.9%) i/s -     82.888k
+                             18.355k (± 5.8%) i/s -     91.936k
     Scan strings with scanf
-                              3.077k (± 6.2%) i/s -     15.555k
+                              3.145k (± 7.2%) i/s -     15.810k
 
     Comparison:
-    Scan strings with ruby_sscanf:    16418.6 i/s
-    Scan strings with scanf:     3077.1 i/s - 5.34x slower
+    Scan strings with ruby_sscanf:    18354.7 i/s
+    Scan strings with scanf:     3145.0 i/s - 5.84x slower
 
 This benchmark test was run under:
 * ruby 2.1.6p336 (2015-04-13 revision 50298) [i386-mingw32]
-* format_engine version = 0.5.2
+* format_engine version = 0.6.0
 
 ## Contributing
 
