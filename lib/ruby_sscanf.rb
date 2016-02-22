@@ -43,9 +43,15 @@ class String
   #A regular expression for quoted strings.
   RSF_QUOTED   = /("([^\\"]|\\.)*")|('([^\\']|\\.)*')/
 
+  #The standard handlers for formats with embedded regular expressions.
+  RSF_RGX      = lambda {parse(fmt.regex) ? dst << found : :break}
+  RSF_RGX_SKIP = lambda {parse(fmt.regex) || :break}
+
+
   #Get the parsing engine. This is cached on a per-thread basis. That is to
   #say, each thread gets its own \FormatEngine::Engine instance.
-  def self.get_engine
+  def self.get_parser_engine
+
     Thread.current[:ruby_sscanf_engine] ||= FormatEngine::Engine.new(
       "%a"  => RSF_FLOAT_PARSE,
       "%*a" => RSF_FLOAT_SKIP,
@@ -114,13 +120,16 @@ class String
       "%X"  => RSF_HEX_PARSE,
       "%*X" => RSF_HEX_SKIP,
 
-      "%["  => lambda {parse(fmt.regex) ? dst << found : :break},
-      "%*[" => lambda {parse(fmt.regex) || :break})
+      "%["  => RSF_RGX,
+      "%*[" => RSF_RGX_SKIP,
+
+      "%/"  => RSF_RGX,
+      "%*/" => RSF_RGX_SKIP)
   end
 
   #Scan the formatted input.
   def sscanf(format)
-    String.get_engine.do_parse(self, [], format)
+    String.get_parser_engine.do_parse(self, [], format)
   end
 
 end

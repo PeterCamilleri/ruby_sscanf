@@ -85,6 +85,9 @@ class ScanTester < Minitest::Test
 
     result = "a b c".sscanf "%[a] %[b] %[c]"
     assert_equal(["a", "b", "c"] , result)
+
+    result = "a abbccc acbcad".sscanf "%/A/i %/a+b+c+/ %/([ab][cd])+/"
+    assert_equal(["a", "abbccc", "acbcad"] , result)
   end
 
 end
