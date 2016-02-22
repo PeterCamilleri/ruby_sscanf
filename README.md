@@ -53,6 +53,8 @@ The layouts of a format specifier are:
 
     %[skip_flag][width]format
     %[skip_flag][[min_width,]max_width]set
+    %[skip_flag]regex[options]
+
 
 * The % sign is the lead-in character.
 * The optional skip flag, the *, causes any data extracted to be ignored.
@@ -91,6 +93,8 @@ or "...".
 leading '0x' or '0X'.
 * [chars] - Scan for a contiguous string of characters in the set [chars].
 * [^chars] - Scan for a contiguous string of characters not in the set [^chars]
+* /regex/ - Scan for a string matching the regular expression. This may be
+followed by one or more optional flags. Supported flags are i, m, and x.
 
 ## Examples
 Here are a few exmaples of the sscanf method in action.
@@ -146,6 +150,9 @@ returns   ["quote", "un quote", "a '"]
 
 "a b c".sscanf "%[a] %[b] %[c]"
 returns   ["a", "b", "c"]
+
+"a abbccc acbcad".sscanf "%/A/i %/a+b+c+/ %/([ab][cd])+/"
+returns   ["a", "abbccc", "acbcad"]
 ```
 
 ## Benchmarks
