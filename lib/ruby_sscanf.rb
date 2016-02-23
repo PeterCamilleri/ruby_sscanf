@@ -11,9 +11,9 @@ class String
   RSF_UNSIGNED = /[+]?\d+/
 
   #A regular expression for hexadecimal integers.
-  RSF_HEX      = /[+-]?(0[xX])?\h+/
-  RSF_HEX_PARSE = lambda {parse(RSF_HEX) ? dst << found.to_i(16) : :break}
-  RSF_HEX_SKIP  = lambda {parse(RSF_HEX) || :break}
+  rsf_hex      = /[+-]?(0[xX])?\h+/
+  RSF_HEX_PARSE = lambda {parse(rsf_hex) ? dst << found.to_i(16) : :break}
+  RSF_HEX_SKIP  = lambda {parse(rsf_hex) || :break}
 
   #A regular expression for octal integers.
   RSF_OCTAL    = /[+-]?(0[oO])?[0-7]+/
@@ -25,9 +25,9 @@ class String
   RSF_INTEGER  = /[+-]?((0[xX]\h+)|(0[bB][01]+)|(0[oO]?[0-7]*)|([1-9]\d*))/
 
   #A regular expression for floating point and scientific notation numbers.
-  RSF_FLOAT    = /[+-]?\d+(\.\d+)?([eE][+-]?\d+)?/
-  RSF_FLOAT_PARSE = lambda {parse(RSF_FLOAT) ? dst << found.to_f : :break}
-  RSF_FLOAT_SKIP  = lambda {parse(RSF_FLOAT) || :break}
+  rsf_float    = /[+-]?\d+(\.\d+)?([eE][+-]?\d+)?/
+  RSF_FLOAT_PARSE = lambda {parse(rsf_float) ? dst << found.to_f : :break}
+  RSF_FLOAT_SKIP  = lambda {parse(rsf_float) || :break}
 
   #A regular expression for rational numbers.
   RSF_RATIONAL = /[+-]?\d+\/\d+(r)?/
@@ -130,6 +130,11 @@ class String
   #Scan the formatted input.
   def sscanf(format)
     String.get_parser_engine.do_parse(self, [], format)
+  end
+
+  #Get any unparsed text.
+  def self.sscanf_unparsed
+    String.get_parser_engine.unparsed
   end
 
 end

@@ -90,4 +90,14 @@ class ScanTester < Minitest::Test
     assert_equal(["a", "abbccc", "acbcad"] , result)
   end
 
+  def test_unparsed_text
+    result = "12 34 and much more".sscanf "%u %u"
+    assert_equal([12, 34] , result)
+    assert_equal(" and much more" , String.sscanf_unparsed)
+
+    result = "12 34 and much more".sscanf "%u %u "
+    assert_equal([12, 34] , result)
+    assert_equal("and much more" , String.sscanf_unparsed)
+  end
+
 end
