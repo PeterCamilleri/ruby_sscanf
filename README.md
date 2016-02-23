@@ -155,6 +155,14 @@ returns   ["a", "b", "c"]
 returns   ["a", "abbccc", "acbcad"]
 ```
 
+## Getting unparsed text
+When a string is parsed, there may be some text at the end of the string that
+is not parsed. It is possible to retrieve this text using the following:
+
+```ruby
+String.sscanf_unparsed
+```
+
 ## Benchmarks
 
 I ran a test just to make sure that ruby_sscanf was not terribly
