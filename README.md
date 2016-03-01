@@ -46,8 +46,10 @@ cannot be matched to input data, processing stops at that point. Otherwise
 processing continues until all the format elements are done.
 
 Literal string components match themselves in the input string. If the literal
-has a trailing space, then this matches zero or more spaces.
-The special sequence '%%' matches one '%' in the input string.
+has a trailing space, then this matches zero or more spaces. The backslash
+character is used as a quoting character. Thus \\\\ is processed as a single \\.
+The special sequence '%%' matches one '%' in the input string. This is
+equivalent to the sequence \\%.
 
 The layouts of a format specifier are:
 
@@ -64,6 +66,7 @@ parsed. Note that a .precision field may be specified, but it is ignored.
 * The min_width is the minimum allowed run of characters in the set.
 * The max_width is the maximum allowed run of characters in the set.
 * The set field is a regular expression style [...] set.
+* The regex field is a full blown regular expression followed by options.
 
 The supported format field values are:
 <br>
