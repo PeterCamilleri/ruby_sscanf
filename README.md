@@ -156,6 +156,9 @@ returns   ["a", "b", "c"]
 
 "a abbccc acbcad".sscanf "%/A/i %/a+b+c+/ %/([ab][cd])+/"
 returns   ["a", "abbccc", "acbcad"]
+
+" 1234i  ".sscanf(" %/\\d+/\\i")
+returns   ["1234"]
 ```
 
 ## Getting unparsed text
