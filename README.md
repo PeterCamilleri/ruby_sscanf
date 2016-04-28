@@ -8,6 +8,7 @@ It is noteworthy that this gem never was intended to be 100% compatible with
 the built in scanf library. Some differences are:
 * It deals only with strings and not IO objects.
 * It adds formats for rational, complex, and quoted string data.
+* It adds formats with embedded regular expression specifications.
 * It adopts a more uniform approach to eating (or not eating) superfluous spaces.
 * Unsigned integer data are not allowed to be negative.
 
