@@ -99,6 +99,8 @@ leading '0x' or '0X'.
 * [^chars] - Scan for a contiguous string of characters not in the set [^chars]
 * /regex/ - Scan for a string matching the regular expression. This may be
 followed by one or more optional flags. Supported flags are i, m, and x.
+Limitation: zero width (positive or negative) look behind assertions (?<= )
+and (?<! ) are not supported at this time.
 
 ## Examples
 Here are a few exmaples of the sscanf method in action.
