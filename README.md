@@ -28,6 +28,8 @@ Or install it yourself as:
 
     $ gem install ruby_sscanf
 
+The ruby_sscanf gem itself is found at: ( https://rubygems.org/gems/ruby_sscanf )
+
 ## Usage
 
 The basic usage for sscanf is:
@@ -102,7 +104,7 @@ followed by one or more optional flags. Supported flags are i, m, and x.
 Limitation: zero width (positive or negative) look behind assertions (?<= )
 and (?<! ) are not supported at this time.
 
-## Examples
+#### Examples
 Here are a few exmaples of the sscanf method in action.
 
 ```ruby
@@ -164,7 +166,7 @@ returns   ["a", "abbccc", "acbcad"]
 returns   ["1234"]
 ```
 
-## Getting unparsed text
+#### Getting unparsed text
 When a string is parsed, there may be some text at the end of the string that
 is not parsed. It is possible to retrieve this text using the following:
 
@@ -180,22 +182,22 @@ pleased to see that in fact ruby_sscanf was faster. Here are the results:
 
     Warming up --------------------------------------
     Scan strings with ruby_sscanf
-                             1.768k i/100ms
+                             1.734k i/100ms
     Scan strings with scanf
-                           310.000  i/100ms
+                           309.000  i/100ms
     Calculating -------------------------------------
     Scan strings with ruby_sscanf
-                             18.355k (± 5.8%) i/s -     91.936k
+                             17.926k (± 0.6%) i/s -     90.168k
     Scan strings with scanf
-                              3.145k (± 7.2%) i/s -     15.810k
+                              3.123k (± 0.6%) i/s -     15.759k
 
     Comparison:
-    Scan strings with ruby_sscanf:    18354.7 i/s
-    Scan strings with scanf:     3145.0 i/s - 5.84x slower
+    Scan strings with ruby_sscanf:    17925.7 i/s
+    Scan strings with scanf:     3123.0 i/s - 5.74x slower
 
 This benchmark test was run under:
 * ruby 2.1.6p336 (2015-04-13 revision 50298) [i386-mingw32]
-* format_engine version = 0.6.0
+* format_engine version = 0.7.2
 
 ## Contributing
 
