@@ -174,6 +174,13 @@ is not parsed. It is possible to retrieve this text using the following:
 String.sscanf_unparsed
 ```
 
+## Demo
+
+A test bed for experimenting with the ruby_sscanf gem is available as a rake
+task:
+
+    $ rake console
+
 ## Benchmarks
 
 I ran a test just to make sure that ruby_sscanf was not terribly
