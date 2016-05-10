@@ -34,16 +34,9 @@ task :reek do |t|
   `reek --no-color lib > reek.txt`
 end
 
-desc "Run an IRB Session with format_engine loaded."
+desc "Fire up an IRB session with ruby_sscanf preloaded."
 task :console do
-  require 'irb'
-  require 'irb/completion'
-  require './lib/ruby_sscanf'
-  puts "Starting an IRB console with ruby_sscanf."
-  puts "Use 'quit' to exit."
-  puts
-  ARGV.clear
-  IRB.start
+  system "ruby irbt.rb local"
 end
 
 desc "What version of code is this?"
