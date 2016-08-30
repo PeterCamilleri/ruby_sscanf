@@ -1,5 +1,5 @@
 #The ruby_sscanf doesn't really live here.
 module RubySscanf
   #The gem's version.
-  VERSION = "0.2.3"
+  VERSION = "0.2.4"
 end
