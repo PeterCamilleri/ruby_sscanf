@@ -105,7 +105,7 @@ Limitation: zero width (positive or negative) look behind assertions (?<= )
 and (?<! ) are not supported at this time.
 
 #### Examples
-Here are a few exmaples of the sscanf method in action.
+Here are a few examples of the sscanf method in action.
 
 ```ruby
 "12 34 -56".sscanf "%d %2d %4d"
