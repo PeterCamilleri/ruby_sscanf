@@ -173,6 +173,8 @@ is not parsed. It is possible to retrieve this text using the following:
 ```ruby
 String.sscanf_unparsed
 ```
+Note: Since the ruby_sscanf gem is designed to be thread safe, each thread has
+its own copy of the unparsed text.
 
 ## Demo
 
