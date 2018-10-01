@@ -193,41 +193,43 @@ This benchmark test was run under:
 * ruby 2.1.6p336 (2015-04-13 revision 50298) [i386-mingw32]
 * format_engine version = 0.7.2
 
-    Warming up --------------------------------------
-    Scan strings with ruby_sscanf
-                             1.734k i/100ms
-    Scan strings with scanf
-                           309.000  i/100ms
-    Calculating -------------------------------------
-    Scan strings with ruby_sscanf
-                             17.926k (± 0.6%) i/s -     90.168k
-    Scan strings with scanf
-                              3.123k (± 0.6%) i/s -     15.759k
+```
+Warming up --------------------------------------
+Scan strings with ruby_sscanf
+                         1.734k i/100ms
+Scan strings with scanf
+                       309.000  i/100ms
+Calculating -------------------------------------
+Scan strings with ruby_sscanf
+                         17.926k (± 0.6%) i/s -     90.168k
+Scan strings with scanf
+                          3.123k (± 0.6%) i/s -     15.759k
 
-    Comparison:
-    Scan strings with ruby_sscanf:    17925.7 i/s
-    Scan strings with scanf:     3123.0 i/s - 5.74x slower
-
+Comparison:
+Scan strings with ruby_sscanf:    17925.7 i/s
+Scan strings with scanf:     3123.0 i/s - 5.74x slower
+```
 
 This benchmark test was run under:
 * ruby 2.3.3p222 (2016-11-21 revision 56859) [i386-mingw32]
 * format_engine version = 0.7.7
 
-    Warming up --------------------------------------
-    Scan strings with ruby_sscanf
-                             1.632k i/100ms
-    Scan strings with scanf
-                           288.000  i/100ms
-    Calculating -------------------------------------
-    Scan strings with ruby_sscanf
-                             17.402k (± 0.6%) i/s -     88.128k in   5.064426s
-    Scan strings with scanf
-                              2.908k (± 0.3%) i/s -     14.688k in   5.050854s
+```
+Warming up --------------------------------------
+Scan strings with ruby_sscanf
+                         1.632k i/100ms
+Scan strings with scanf
+                       288.000  i/100ms
+Calculating -------------------------------------
+Scan strings with ruby_sscanf
+                         17.402k (± 0.6%) i/s -     88.128k in   5.064426s
+Scan strings with scanf
+                          2.908k (± 0.3%) i/s -     14.688k in   5.050854s
 
-    Comparison:
-    Scan strings with ruby_sscanf:    17402.1 i/s
-    Scan strings with scanf:     2908.1 i/s - 5.98x  slower
-
+Comparison:
+Scan strings with ruby_sscanf:    17402.1 i/s
+Scan strings with scanf:     2908.1 i/s - 5.98x  slower
+```
 
 
 
@@ -243,6 +245,8 @@ This benchmark test was run under:
 
 #### Plan B
 
-Go to the GitHub repository and raise an issue calling attention to some
+Go to the GitHub repository and raise an
+[issue](https://github.com/PeterCamilleri/ruby_sscanf/issues)
+ calling attention to some
 aspect that could use some TLC or a suggestion or an idea.
 
