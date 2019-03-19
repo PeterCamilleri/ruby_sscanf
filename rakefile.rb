@@ -18,7 +18,7 @@ RDoc::Task.new do |rdoc|
   #rdoc.options << '--coverage-report'
 
   #Set a title.
-  rdoc.options << '--title' << 'fOOrth Language Internals'
+  rdoc.options << '--title' << 'ruby_sscanf Internal Documentation'
 
 end
 
