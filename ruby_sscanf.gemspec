@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "format_engine", "~> 0.7.2"
 
-  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "rake", ">= 12.3.3"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency 'minitest', "~> 5.7"
   spec.add_development_dependency 'minitest_visible', "~> 0.1"
