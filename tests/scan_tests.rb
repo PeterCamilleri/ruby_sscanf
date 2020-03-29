@@ -1,14 +1,9 @@
 require_relative '../lib/ruby_sscanf'
 gem              'minitest'
 require          'minitest/autorun'
-require          'minitest_visible'
-
 
 # Test the internals of the parser engine. This is not the normal interface.
 class ScanTester < Minitest::Test
-
-  #Track mini-test progress.
-  include MinitestVisible
 
   def test_that_it_can_scan
     result = "12 34 -56".sscanf "%d %2d %4d"
